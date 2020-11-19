@@ -1,10 +1,10 @@
 # TACC Quick Start
 ## Workflow Overview
-![ML Job Workflow](./static/Workflow1.pdf)
+![ML Job Workflow](./static/job_workflow.png)
 
 The above picture illustrates TACC job submission workflow.
 
-![Debug Workflow](./static/Workflow2.pdf)
+![Debug Workflow](./static/debug_workflow.png)
 
 The above picture illustrates TACC job debugging workflow.
 ## Download tcloud SDK
