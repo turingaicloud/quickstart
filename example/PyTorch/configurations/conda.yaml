@@ -1,0 +1,8 @@
+name: torch-env
+channels:
+  - pytorch
+dependencies:
+  - python=3.6.9
+  - pytorch=1.6.0
+  - torchvision=0.7.0
+  - tensorboard=1.15.0
