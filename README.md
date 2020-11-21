@@ -10,5 +10,11 @@ The above picture illustrates TACC job submitting and debugging workflow.
 Download latest tcloud SDK from [tags](https://github.com/turingaicloud/quickstart/tags).
 - __Install tcloud SDK__ \
 Place `setup.sh` and `tcloud` in the same directory, and run `setup.sh`.
+
+## TACC VARIABLES
+
++ `TACC_WORKDIR`: TACC Workspace
++ `TACC_USERDIR`: User's Personal Dir
+
 ## Examples
 Basic examples are provided under the [example](example) folder. These examples include: [TensorFlow](example/TensorFlow), [PyTorch](example/PyTorch) and [MXNet](example/MXNet).
