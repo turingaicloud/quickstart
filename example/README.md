@@ -19,7 +19,8 @@ TACC support multiple ML frameworks such as TensorFlow, PyTorch and MXNet. We wi
   + TACC ENV
 
     ~~~shell
-    TACC_WORKERDIR #repo directory
+    TACC_WORKDIR # Workspace
+    TACC_USERDIR # User's Personal Dir
     ~~~
 
   + TuXiv configuration
@@ -49,8 +50,8 @@ TACC support multiple ML frameworks such as TensorFlow, PyTorch and MXNet. We wi
 
 + Enter the `TACC_WORKDIR` directory and follow the steps.
 + Build environment and submit job: `tcloud submit`
-+ Monitor job: `tcloud ps [job id]`
-+ Cancel job: `tcloud cancel [job id]`
++ Monitor job: `tcloud ps [-j <job_id>]`
++ Cancel job: `tcloud cancel [-j <job_id>]`
 
 
 
@@ -71,7 +72,8 @@ TACC support multiple ML frameworks such as TensorFlow, PyTorch and MXNet. We wi
   + TACC ENV
 
     ~~~shell
-    TACC_WORKERDIR #repo directory
+    TACC_WORKDIR # Workspace
+    TACC_USERDIR # User's Personal Dir
     ~~~
 
   + TuXiv configuration
@@ -119,8 +121,8 @@ TACC support multiple ML frameworks such as TensorFlow, PyTorch and MXNet. We wi
 
 + Enter the `TACC_WORKDIR` directory and follow the steps.
 + Build environment and submit job: `tcloud submit`
-+ Monitor job: `tcloud ps [job id]`
-+ Cancel job: `tcloud cancel [job id]`
++ Monitor job: `tcloud ps [-j <job_id>]`
++ Cancel job: `tcloud cancel [-j <job_id>]`
 
 
 
@@ -141,7 +143,8 @@ TACC support multiple ML frameworks such as TensorFlow, PyTorch and MXNet. We wi
   + TACC ENV
 
     ~~~shell
-    TACC_WORKERDIR #repo directory
+    TACC_WORKDIR # Workspace
+    TACC_USERDIR # User's Personal Dir
     ~~~
 
   + TuXiv configuration
@@ -168,5 +171,5 @@ TACC support multiple ML frameworks such as TensorFlow, PyTorch and MXNet. We wi
 
 + Enter the `TACC_WORKDIR` directory and follow the steps.
 + Build environment and submit job: `tcloud submit`
-+ Monitor job: `tcloud ps [job id]`
-+ Cancel job: `tcloud cancel [job id]`
++ Monitor job: `tcloud ps [-j <job_id>]`
++ Cancel job: `tcloud cancel [-j <job_id>]`
