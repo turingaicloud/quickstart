@@ -6,7 +6,7 @@ TACC support multiple ML frameworks such as TensorFlow, PyTorch and MXNet. We wi
 
 + Dataset: mnist
 + Task: image classification
-+ Code: [mnist.py](https://github.com/turingaicloud/tcloud-sdk/blob/master/example/TensorFlow/mnist.py)
++ Code: [mnist.py](TensorFlow/mnist.py)
 
 ### Getting started
 
@@ -59,7 +59,7 @@ TACC support multiple ML frameworks such as TensorFlow, PyTorch and MXNet. We wi
 
 + Dataset: mnist
 + Task: image classification
-+ Code: [mnist.py](https://github.com/turingaicloud/tcloud-sdk/blob/master/example/PyTorch/mnist.py)
++ Code: [mnist.py](PyTorch/mnist.py)
 
 ### Getting started
 
@@ -130,7 +130,7 @@ TACC support multiple ML frameworks such as TensorFlow, PyTorch and MXNet. We wi
 
 + Dataset: mnist
 + Task: image classification
-+ Code: [mnist.py](https://github.com/turingaicloud/tcloud-sdk/blob/master/example/MXNet/mnist.py)
++ Code: [mnist.py](MXNet/mnist.py)
 
 ### Getting started
 
