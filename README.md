@@ -11,4 +11,4 @@ Download latest tcloud SDK from [tags](https://github.com/turingaicloud/quicksta
 - __Install tcloud SDK__ \
 Place `setup.sh` and `tcloud` in the same directory, and run `setup.sh`.
 ## Examples
-Basic examples are provided under the [example](examples) folder. These examples include: [TensorFlow](TensorFlow), [PyTorch](PyTorch) and [MXNet](MXNet).
+Basic examples are provided under the [example](example) folder. These examples include: [TensorFlow](example/TensorFlow), [PyTorch](example/PyTorch) and [MXNet](example/MXNet).
