@@ -66,5 +66,8 @@ You can use `tcloud init` to initialize the job configuration. `tcloud init` wil
 + `TACC_WORKDIR`: TACC Workspace
 + `TACC_USERDIR`: User's Personal Dir
 
+## Demo video
+You can find the demo video at [video](https://drive.google.com/file/d/1eEZzgH3MipdXy3eIfgasUaMdlMquCqf8/view?usp=sharing).
+
 ## Examples
 Basic examples are provided under the [example](example) folder. These examples include: [TensorFlow](example/TensorFlow), [PyTorch](example/PyTorch) and [MXNet](example/MXNet).
