@@ -13,11 +13,12 @@ Place `setup.sh` and `tcloud` in the same directory, and run `setup.sh`.
 
 ## Configuration
 ### CLI Configuration
-Before using the tcloud CLI and submit ML jobs to TACC, you need to configure your TACC credentials. You can do this by running the `tcloud config` command:
+1. Before using the tcloud CLI and submit ML jobs to TACC, you need to configure your TACC credentials. You can do this by running the `tcloud config` command:
 ```
 $ tcloud config [-u/--username] MYUSERNAME
 $ tcloud config [-f/--file] MYFILEPATH
 ```
+2. You need to run `tcloud init` command to obtain the latest cluster hardware information from TACC cluster.
 
 ### Job Configuration
 #### TUXIV.CONF
