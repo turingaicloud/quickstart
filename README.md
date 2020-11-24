@@ -67,6 +67,18 @@ You can use `tcloud init` to initialize the job configuration. `tcloud init` wil
 + `TACC_WORKDIR`: TACC Workspace
 + `TACC_USERDIR`: User's Personal Dir
 
+## Job Monitoring
+In this section, we provide two different methods to monitoring a job log and other outputs.
++ Download
+
+  You can either save your output file in the `USERDIR` or copy your output file to the `USERDIR` in your own code. After training you can use `tcloud ls [Filepath]` to find the output file and use `tcloud download [Filepath]`. Noted that you can only read and download the file in the `USERDIR`, and the file in `WORKDIR` may be remove after the job is terminated.
+  
++ Run application services
+
+  Here we give an example of application service, using tensorboard to monitor the job. 
+  ~~~shell
+  ssh -p 30041 -L 10006:127.0.0.1:10006  username@sing.cse.ust.hk /mnt/sharefs/home/username/.Miniconda3/envs/torch-env/bin/tensorboard --logdir=/mnt/sharefs/home/username/WORKDIR/PyTorch/runs --port=10006
+  ~~~
 ## Demo video
 You can find the demo video at [video](https://drive.google.com/file/d/1eEZzgH3MipdXy3eIfgasUaMdlMquCqf8/view?usp=sharing).
 
