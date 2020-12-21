@@ -7,7 +7,7 @@ The above picture illustrates TACC job submitting and debugging workflow.
 
 ## Download/Install tcloud SDK
 - __Download tcloud SDK__ \
-Download latest tcloud SDK from [tags](https://github.com/turingaicloud/quickstart/tags).
+Download the latest tcloud SDK from [tags](https://github.com/turingaicloud/quickstart/tags).
 - __Install tcloud SDK__ \
 Place `setup.sh` and `tcloud` in the same directory, and run `setup.sh`.
 
@@ -23,7 +23,7 @@ $ tcloud config [-f/--file] MYPRIVATEFILEPATH
 ### Job Configuration
 #### TUXIV.CONF
 
-You can use `tcloud init` to initialize the job configuration. `tcloud init` will create a template configuration file named `tuxiv.conf` . There are four parts in `tuxiv.conf`, config different parts of job submission. Noted that `tuxiv.conf` follows the yaml format.
+You can use `tcloud init` to pull the latest cluster configurations from remote. There are four parts in `tuxiv.conf`, config different parts of job submission. Noted that `tuxiv.conf` follows the yaml format.
 
 + Entrypoint
 
@@ -49,29 +49,36 @@ You can use `tcloud init` to initialize the job configuration. `tcloud init` wil
 
 + Job
 
-  In this section, you can specify your slurm configurations for slurm cluster resources, including number of nodes, CPUs, GPUs and so on. All the slurm cluster configuration should be set in the general part.
+  In this section, you can specify your slurm configurations for slurm cluster resources, including number of nodes, CPUs, GPUs, output file and so on. All the slurm cluster configuration should be set in the general part.
 
   ~~~yaml
   job:
       name: test
       general:
           - nodes=2
+          - output=${TACC_SLURM_USERLOG}/output.log
   ~~~
 
 + Datasets
 
-  In this section, you can specify the data location or url for your job.
+  In this section, you can specify the required CityNet dataset name for your job. You can view the table of CityNet datasets at [CityNet Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0).
+
+  ~~~yaml
+  datasets:
+    - OpenRoadMap
+  ~~~
 
 ## TACC VARIABLES
 
-+ `TACC_WORKDIR`: TACC Workspace
-+ `TACC_USERDIR`: User's Personal Dir
++ `TACC_WORKDIR`: TACC job workspace directory, each job has a different workspace directory.
++ `TACC_USERDIR`: TACC User directory.
++ `TACC_SLURM_USERLOG`: Slurm log directory, the default value is `${TACC_USERDIR}/slurm_log`.
 
 ## Job Monitoring
 In this section, we provide two different methods to monitoring a job log and other outputs.
 + Download
 
-  You can either save your output file in the `USERDIR` or copy your output file to the `USERDIR` in your own code. After training you can use `tcloud ls [Filepath]` to find the output file and use `tcloud download [Filepath]`. Noted that you can only read and download the file in the `USERDIR`, and the file in `WORKDIR` may be remove after the job is terminated.
+  You can either save your output file in the `USERDIR` or copy your output file to the `USERDIR` in your own code. After training you can use `tcloud ls [filepath]` to find the output file and use `tcloud download [filepath]`. Noted that you can only read and download the file in the `USERDIR`, and the file in `WORKDIR` may be remove after the job is terminated.
   
 + Run application services
 
@@ -83,4 +90,4 @@ In this section, we provide two different methods to monitoring a job log and ot
 You can find the demo video at [video](https://drive.google.com/file/d/1eEZzgH3MipdXy3eIfgasUaMdlMquCqf8/view?usp=sharing).
 
 ## Examples
-Basic examples are provided under the [example](example) folder. These examples include: [TensorFlow](example/TensorFlow), [PyTorch](example/PyTorch) and [MXNet](example/MXNet).
+Basic examples are provided under the [example](example) folder. These examples include: [HelloWorld](example/helloworld), [TensorFlow](example/TensorFlow), [PyTorch](example/PyTorch) and [MXNet](example/MXNet).
