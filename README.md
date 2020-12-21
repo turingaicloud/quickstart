@@ -5,6 +5,9 @@
 
 The above picture illustrates TACC job submitting and debugging workflow.
 
+## Upload SSH public key to TACC administrator
+Before using tcloud SDK, please make sure that you have submitted your public key to TACC. You may generate SSH public key according to the [steps](https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key).
+
 ## Download/Install tcloud SDK
 - __Download tcloud SDK__ \
 Download the latest tcloud SDK from [tags](https://github.com/turingaicloud/quickstart/tags).
