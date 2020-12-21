@@ -61,7 +61,7 @@ You can use `tcloud init` to pull the latest cluster configurations from remote.
 
 + Datasets
 
-  In this section, you can specify the required CityNet dataset name for your job. You can view the table of CityNet datasets at [CityNet Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0).
+  In this section, you can specify the needed CityNet dataset name, and tcloud will help place the dataset access in `TACC_USERDIR`. You can view the table of CityNet datasets at [CityNet Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0).
 
   ~~~yaml
   datasets:
