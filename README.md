@@ -34,7 +34,7 @@ You can use `tcloud init` to pull the latest cluster configurations from remote.
 
   ~~~yaml
   entrypoint:
-      - python ${TACC_WORKDIR}/mnist.py --epoch=3
+      - python ${TACC_WORKDIR}/mnist.py --epoch=3 
   ~~~
 
 + Environment
