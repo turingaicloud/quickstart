@@ -1,4 +1,4 @@
-# TACC Quick Start
+# Turing AI Cloud Quick Start
 ## Workflow Overview
 
 ![Workflow](./static/workflow.png)
