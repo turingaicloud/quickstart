@@ -87,7 +87,7 @@ In this section, we provide two different methods to monitoring a job log and ot
 
   Here we give an example of application service, using tensorboard to monitor the job. 
   ~~~shell
-  ssh -p 30041 -L 10006:127.0.0.1:10006  username@sing.cse.ust.hk /mnt/sharefs/home/username/.Miniconda3/envs/torch-env/bin/tensorboard --logdir=/mnt/sharefs/home/username/WORKDIR/PyTorch/runs --port=10006
+  ssh -p 30041 -L 10006:127.0.0.1:10006  username@ising.cse.ust.hk /mnt/home/username/.Miniconda3/envs/torch-env/bin/tensorboard --logdir=/mnt/home/username/WORKDIR/PyTorch/runs --port=10006
   ~~~
 ## Demo video
 You can find the demo video at [demo video](https://drive.google.com/file/d/1eEZzgH3MipdXy3eIfgasUaMdlMquCqf8/view?usp=sharing) and conda-cache videon at [conda-cache video](https://drive.google.com/file/d/1hfFfWZoJj6dlNiOK-dbyvrE_VmM07w7A/view?usp=sharing).
