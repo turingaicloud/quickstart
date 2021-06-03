@@ -70,7 +70,7 @@ You can use `tcloud init` to pull the latest cluster configurations from remote.
     - OpenRoadMap
   ~~~
 
-  - User dataset: if you want to use your own dataset, you may *skip* this part and follow the [instruction](docs/user_dataset.md) to upload and use your dataset.
+  - User dataset: if you want to use your own dataset, you may **skip** this part and follow the [instructions](docs/user_dataset.md) to upload and use your dataset.
 
 
 ## TACC VARIABLES

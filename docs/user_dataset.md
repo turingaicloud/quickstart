@@ -13,6 +13,7 @@ workdir = os.environ.get('TACC_WORKDIR')
 userdir = os.environ.get('TACC_USERDIR')
 
 ...
+
 train_dataset = torchvision.datasets.MNIST('{}/{}'.format(userdir, <YOUR_DATASET_PATH>), train=True, download=False,
                        transform=transforms.Compose([
                            transforms.ToTensor(),
