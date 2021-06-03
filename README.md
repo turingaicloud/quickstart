@@ -63,13 +63,15 @@ You can use `tcloud init` to pull the latest cluster configurations from remote.
   ~~~
 
 + Datasets
-
-  In this section, you can specify the needed CityNet dataset name, and tcloud will help place the dataset access in `TACC_USERDIR`. You can view the table of CityNet datasets at [CityNet Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0).
+  - CityNet dataset: you can specify the needed CityNet dataset name, and tcloud will help place the dataset access in `TACC_USERDIR`. You can view the table of CityNet datasets at [CityNet Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0).
 
   ~~~yaml
   datasets:
     - OpenRoadMap
   ~~~
+
+  - User dataset: if you want to use your own dataset, you may *skip* this part and follow the [instruction](docs/user_dataset.md) to upload and use your dataset.
+
 
 ## TACC VARIABLES
 
