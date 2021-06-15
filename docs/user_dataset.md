@@ -1,9 +1,11 @@
 # Upload dataset
 You may upload your dataset with `tcloud upload` command:
 ```
-tcloud upload <local_dirpath> [<remote_dirpath>]
+tcloud upload [-c] <local_dirpath> [<remote_dirpath>]
 ```
-The `tcloud upload` command helps upload your dataset to ${TACC_USERDIR}.
+The `tcloud upload` command helps upload your dataset to ${TACC_USERDIR}. 
+
+Note that by default tcloud incrementally upload your dataset to TACC, if you want to **delete previous version** and re-upload the dataset, you may add "-c" flag in your command.
 
 # Specify dataset in code
 After uploading your own dataset, you must add several codes to specify the location of the dataset. Below is an example in PyTorch:
