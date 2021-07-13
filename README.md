@@ -3,7 +3,7 @@
 
 ![Workflow](./static/workflow.png)
 
-The above picture illustrates TACC job submitting and debugging workflow.
+The above picture illustrates the submission and debug workflows of TACC job.
 
 ## Upload SSH public key to TACC
 Before using tcloud SDK, please make sure that you have submitted your public key to TACC. You may generate SSH public key according to the [steps](https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key).
@@ -16,7 +16,7 @@ Place `setup.sh` and `tcloud` in the same directory, and run `setup.sh`.
 
 ## Configuration
 ### CLI Configuration
-1. Before using the tcloud CLI and submit ML jobs to TACC, you need to configure your TACC credentials. You can do this by running the `tcloud config` command:
+1. Before using the tcloud CLI to submit ML jobs, you need to configure your TACC credentials. You can do this by running the `tcloud config` command:
 ```
 $ tcloud config [-u/--username] MYUSERNAME
 $ tcloud config [-f/--file] MYPRIVATEFILEPATH
@@ -26,11 +26,11 @@ $ tcloud config [-f/--file] MYPRIVATEFILEPATH
 ### Job Configuration
 #### TUXIV.CONF
 
-You can use `tcloud init` to pull the latest cluster configurations from remote. There are four parts in `tuxiv.conf`, config different parts of job submission. Noted that `tuxiv.conf` follows the yaml format.
+You can use `tcloud init` to pull the latest cluster configuration from TACC. There are four parts in `tuxiv.conf` that configure different parts of job submission. Noted that `tuxiv.conf` follows **yaml format**.
 
 + Entrypoint
 
-  In this section, you should insert you shell commands to run your code line-by-line. The tcloud CLI will run the job as your configurations.
+  In this section, you should input you shell commands to run your code line-by-line. The tcloud CLI will help run the job according to your commands.
 
   ~~~yaml
   entrypoint:
@@ -39,7 +39,7 @@ You can use `tcloud init` to pull the latest cluster configurations from remote.
 
 + Environment
 
-  In this section, you can specify your conda configurations for virtual environment used in the cluster, including environment name, dependencies, source channels and so on.
+  In this section, you can specify your software requirements, including the environment name, dependencies, source channels and so on. The tcloud CLI will help build your environment with *miniconda*.
 
   ~~~yaml
   environment:
@@ -63,7 +63,7 @@ You can use `tcloud init` to pull the latest cluster configurations from remote.
   ~~~
 
 + Datasets
-  - CityNet dataset: you can specify the needed CityNet dataset name, and tcloud will help place the dataset access in `TACC_USERDIR`. You can view the table of CityNet datasets at [CityNet Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0).
+  - CityNet dataset: you can specify your required CityNet dataset name, and tcloud will help place the dataset access in `TACC_USERDIR`. You can view the table of CityNet datasets at [CityNet Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0).
 
   ~~~yaml
   datasets:
@@ -80,19 +80,19 @@ You can use `tcloud init` to pull the latest cluster configurations from remote.
 + `TACC_SLURM_USERLOG`: Slurm log directory, the default value is `${TACC_USERDIR}/slurm_log`.
 
 ## Job Monitoring
-In this section, we provide two different methods to monitoring a job log and other outputs.
+In this section, we provide two methods to monitor the job log.
 + Download
 
-  You can either save your output file in the `USERDIR` or copy your output file to the `USERDIR` in your own code. After training you can use `tcloud ls [filepath]` to find the output file and use `tcloud download [filepath]`. Noted that you can only read and download the file in the `USERDIR`, and the file in `WORKDIR` may be remove after the job is terminated.
+  You can either save your output files in `USERDIR` or copy your output files to `USERDIR` in your own code. After training, you can use `tcloud ls [filepath]` to find the output files and use `tcloud download [filepath]`. Note that you can only read and download files in `USERDIR`, and the files in `WORKDIR` may be removed after the job is finished.
   
 + Run application services
 
-  Here we give an example of application service, using tensorboard to monitor the job. 
+  Here we give an example of application service, which uses tensorboard to monitor a job. 
   ~~~shell
   ssh -p 30041 -L 10006:127.0.0.1:10006  username@ising.cse.ust.hk /mnt/home/username/.Miniconda3/envs/torch-env/bin/tensorboard --logdir=/mnt/home/username/WORKDIR/PyTorch/runs --port=10006
   ~~~
 ## Demo video
-You can find the demo video at [demo video](https://drive.google.com/file/d/1eEZzgH3MipdXy3eIfgasUaMdlMquCqf8/view?usp=sharing) and conda-cache videon at [conda-cache video](https://drive.google.com/file/d/1hfFfWZoJj6dlNiOK-dbyvrE_VmM07w7A/view?usp=sharing).
+The following videos will help you use tcloud CLI to begin your TACC journey: [demo video](https://drive.google.com/file/d/1eEZzgH3MipdXy3eIfgasUaMdlMquCqf8/view?usp=sharing) and [conda-cache video](https://drive.google.com/file/d/1hfFfWZoJj6dlNiOK-dbyvrE_VmM07w7A/view?usp=sharing).
 
 ## Examples
 Basic examples are provided under the [example](example) folder. These examples include: [HelloWorld](example/helloworld), [TensorFlow](example/TensorFlow), [PyTorch](example/PyTorch) and [MXNet](example/MXNet).
