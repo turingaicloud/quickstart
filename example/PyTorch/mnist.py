@@ -92,6 +92,16 @@ def main():
                         help='how many batches to wait before logging training status')
     parser.add_argument('--save-model', action='store_true', default=False,
                         help='For Saving the current Model')
+    
+    parser.add_argument('--proid', type=int, default=0,
+                        help='For Saving the current Model')
+    parser.add_argument('--localid', action='store_true', default=False,
+                        help='For Saving the current Model')
+    parser.add_argument('--nt', action='store_true', default=False,
+                        help='For Saving the current Model')
+    parser.add_argument('--node', action='store_true', default=False,
+                        help='For Saving the current Model')
+
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
 
@@ -101,17 +111,21 @@ def main():
 
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
     rank = int(os.environ['SLURM_PROCID'])
+    # rank = 0
     local_rank = int(os.environ['SLURM_LOCALID'])
+    # local_rank = 0
     world_size = int(os.environ['SLURM_NTASKS'])
+    # world_size = 1
     def get_ip(iplist):
         ip = iplist.split('[')[0] + iplist.split('[')[1].split('-')[0]
         return ip
     iplist = os.environ['SLURM_JOB_NODELIST']
     ip = get_ip(iplist)
-    # ip="gpu02"
+    print(iplist)
+    # ip="gpu12"
     print(ip, rank, local_rank, world_size)
     dist_init(ip, rank, local_rank, world_size)
-    train_dataset = datasets.MNIST('data', train=True, download=True,
+    train_dataset = datasets.MNIST('/mnt/data/mnist', train=True, download=False,
                        transform=transforms.Compose([
                            transforms.ToTensor(),
                            transforms.Normalize((0.1307,), (0.3081,))
@@ -122,7 +136,7 @@ def main():
         batch_size=args.batch_size,
         sampler=train_sampler,
         **kwargs)
-    test_dataset = datasets.MNIST('data', train=False, transform=transforms.Compose([
+    test_dataset = datasets.MNIST('/mnt/data/mnist', train=False, transform=transforms.Compose([
                            transforms.ToTensor(),
                            transforms.Normalize((0.1307,), (0.3081,))
                        ]))
