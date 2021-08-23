@@ -92,15 +92,8 @@ def main():
                         help='how many batches to wait before logging training status')
     parser.add_argument('--save-model', action='store_true', default=False,
                         help='For Saving the current Model')
-    
-    parser.add_argument('--proid', type=int, default=0,
-                        help='For Saving the current Model')
-    parser.add_argument('--localid', action='store_true', default=False,
-                        help='For Saving the current Model')
-    parser.add_argument('--nt', action='store_true', default=False,
-                        help='For Saving the current Model')
-    parser.add_argument('--node', action='store_true', default=False,
-                        help='For Saving the current Model')
+    parser.add_argument('--datasetDir',
+                        help='Please add your dataset directory')
 
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -125,7 +118,7 @@ def main():
     # ip="gpu12"
     print(ip, rank, local_rank, world_size)
     dist_init(ip, rank, local_rank, world_size)
-    train_dataset = datasets.MNIST('/mnt/data/mnist', train=True, download=False,
+    train_dataset = datasets.MNIST(args.datasetDir, train=True, download=False,
                        transform=transforms.Compose([
                            transforms.ToTensor(),
                            transforms.Normalize((0.1307,), (0.3081,))
@@ -136,7 +129,7 @@ def main():
         batch_size=args.batch_size,
         sampler=train_sampler,
         **kwargs)
-    test_dataset = datasets.MNIST('/mnt/data/mnist', train=False, transform=transforms.Compose([
+    test_dataset = datasets.MNIST(args.datasetDir, train=False, transform=transforms.Compose([
                            transforms.ToTensor(),
                            transforms.Normalize((0.1307,), (0.3081,))
                        ]))
