@@ -65,13 +65,24 @@ You can use `tcloud init` to pull the latest cluster configuration from TACC. Th
   **Note:** You can modify the output log path in Job section. For debugging purpose, we recommend you set the `output` value under `${TACC_USERDIR}` directory and check it using `tcloud ls` and `tcloud download`.
 
 + Datasets
-  - CityNet dataset: you can specify your required CityNet dataset name, and tcloud will help place the dataset access in `TACC_USERDIR`. You can view the table of CityNet datasets at [CityNet Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0).
+  - Tcloud will help place the public datasets access in `TACC_USERDIR`. You can view the table of  datasets at [Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0) or check the table below.
 
-  ~~~yaml
-  datasets:
-    - OpenRoadMap
-  ~~~
-
+      - 
+        |  | Dataset Name |
+        | :------: | :------: |
+        | 0 | imagenet |
+        | 1 | mnist |
+        | 2 | cifar-10 |
+        | 3 | coco17 |
+        | 4 | *updating |
+    ~~~yaml
+    datasets:
+      - imagenet
+    ~~~
+  - To access the public dataset you can use:
+    ~~~shell
+    ${TACC_USER_DIR}/DATASET_NAME
+    ~~~
   - User dataset: if you want to use your own dataset, you may **skip** this part and follow the [instructions](docs/user_dataset.md) to upload and use your dataset.
 
 
