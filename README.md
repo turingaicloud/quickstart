@@ -65,7 +65,7 @@ You can use `tcloud init` to pull the latest cluster configuration from TACC. Th
   **Note:** You can modify the output log path in Job section. For debugging purpose, we recommend you set the `output` value under `${TACC_USERDIR}` directory and check it using `tcloud ls` and `tcloud download`.
 
 + Datasets
-  - Tcloud will help place the public datasets access in `TACC_USERDIR`. You can view the table of  datasets at [Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0) or check the table below.
+  - tcloud will help place the public datasets access in `TACC_USERDIR`. You can view the table of  datasets at [Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0) or check the table below.
 
       - 
         |  | Dataset Name |
@@ -74,15 +74,17 @@ You can use `tcloud init` to pull the latest cluster configuration from TACC. Th
         | 1 | mnist |
         | 2 | cifar-10 |
         | 3 | coco17 |
-        | 4 | *updating |
-    ~~~yaml
-    datasets:
-      - imagenet
-    ~~~
-  - To access the public dataset you can use:
-    ~~~shell
-    ${TACC_USER_DIR}/DATASET_NAME
-    ~~~
+        | 4 | more datasets upon request |
+
+    - to access the public dataset you need to add this command in your tuxiv.conf file:
+      ~~~yaml
+      datasets:
+        - imagenet
+      ~~~
+    - also use this path as a dataset directory:
+      ~~~shell
+      ${TACC_USERDIR}/DATASET_NAME
+      ~~~
   - User dataset: if you want to use your own dataset, you may **skip** this part and follow the [instructions](docs/user_dataset.md) to upload and use your dataset.
 
 
