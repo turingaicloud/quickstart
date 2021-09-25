@@ -110,7 +110,7 @@ def main():
     world_size = int(os.environ['SLURM_NTASKS'])
     # world_size = 1
     def get_ip(iplist):
-        ip = iplist.split('[')[0] + iplist.split('[')[1].split('-')[0]
+        ip = iplist.split(',')[0]
         return ip
     iplist = os.environ['SLURM_JOB_NODELIST']
     ip = get_ip(iplist)

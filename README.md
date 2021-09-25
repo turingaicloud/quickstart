@@ -112,5 +112,5 @@ The following videos will help you use tcloud CLI to begin your TACC journey: [d
 ## Examples
 Basic examples are provided under the [example](example) folder. These examples include: [HelloWorld](example/helloworld), [TensorFlow](example/TensorFlow), [PyTorch](example/PyTorch) and [MXNet](example/MXNet).
 
-### FAQ
+## FAQ
 [FAQ](FAQ.md)
