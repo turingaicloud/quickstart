@@ -77,7 +77,7 @@ def get_ip(str):
         str2 = str1[1].strip("]").split("-")
         output = str1[0] + str2[0]
     else:
-        print("!!! unknow ip format !!!")
+        print("Unknow ip format")
     return output
 
 def main():
