@@ -17,93 +17,86 @@ Place `setup.sh` and `tcloud` in the same directory, and run `setup.sh`.
 
 ## Submitting Your First TACC Job
 ### CLI Tool Initialization
-1. First, you need to configure your TACC credentials. You can do this by running the `tcloud config` command:
++ 
+  First, you need to configure your TACC credentials. You can do this by running the `tcloud config` command:
+  ```
+  $ tcloud config [-u/--username] MYUSERNAME
+  $ tcloud config [-f/--file] MYPRIVATEFILEPATH
+  ```
++ 
+  Then, run `tcloud init` command to obtain the latest cluster hardware information from TACC cluster.
+  ```
+  PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+  tacc*        up   infinite      5  alloc 10-0-7-[18-19],10-0-8-[18-19]
+  tacc*        up   infinite     19   idle 10-0-2-[18-19],10-0-3-[10-13]
+  ```
+
+### Download Sample Job
+You can use [this link](https://github.com/turingaicloud/quickstart/archive/refs/heads/master.zip) to download our example code.
+
+
+### Submit a Job
+Each job requires a `main.py` with `tuxiv.conf`
+
++
+  main.py: Your machine learning training code.
+
++
+  tuxiv.conf: [Detail about tuxiv.conf](tuxiv.conf.md)
+
+  
+After tcloud is configured correctly, you can try to submit your first job. 
+
+1. Go to the example folder in your terminal.
+2. Run `tcloud submit` command.
 ```
-$ tcloud config [-u/--username] MYUSERNAME
-$ tcloud config [-f/--file] MYPRIVATEFILEPATH
+~/Dow/quickstart-master/example/helloworld ❯ tcloud submit
+Start parsing tuxiv.conf...
+building file list ...
+8 files to consider
+helloworld/
+helloworld/run.sh
+         151 100%    0.00kB/s    0:00:00 (xfer#1, to-check=5/8)
+helloworld/configurations/
+helloworld/configurations/citynet.sh
+          12 100%   11.72kB/s    0:00:00 (xfer#2, to-check=2/8)
+helloworld/configurations/conda.yaml
+         107 100%  104.49kB/s    0:00:00 (xfer#3, to-check=1/8)
+helloworld/configurations/run.slurm
+         278 100%  271.48kB/s    0:00:00 (xfer#4, to-check=0/8)
+
+sent 429 bytes  received 144 bytes  382.00 bytes/sec
+total size is 1071  speedup is 1.87
+Submitted batch job 2000
+Job helloworld submitted.
 ```
-2. Then, run `tcloud init` command to obtain the latest cluster hardware information from TACC cluster.
 
-### Job Configuration
-#### TUXIV.CONF
-
-You can use `tcloud init` to pull the latest cluster configuration from TACC. There are four parts in `tuxiv.conf` that configure different parts of job submission. Noted that `tuxiv.conf` follows **yaml format**.
-
-+ Entrypoint
-
-  In this section, you should input you shell commands to run your code line-by-line. The tcloud CLI will help run the job according to your commands.
-
-  ~~~yaml
-  entrypoint:
-      - python ${TACC_WORKDIR}/mnist.py --epoch=3 
-  ~~~
-
-+ Environment
-
-  In this section, you can specify your software requirements, including the environment name, dependencies, source channels and so on. The tcloud CLI will help build your environment with *miniconda*.
-
-  ~~~yaml
-  environment:
-      name: torch-env
-      dependencies:
-          - pytorch=1.6.0
-          - torchvision=0.7.0
-      channels: pytorch
-  ~~~
-
-+ Job
-
-  In this section, you can specify your slurm configurations for slurm cluster resources, including number of nodes, CPUs, GPUs, output file and so on. All the slurm cluster configuration should be set in the general part.
-
-  ~~~yaml
-  job:
-      name: test
-      general:
-          - nodes=2
-          - output=${TACC_SLURM_USERLOG}/output.log
-  ~~~
-
-  **Note:** You can modify the output log path in Job section. For debugging purpose, we recommend you set the `output` value under `${TACC_USERDIR}` directory and check it using `tcloud ls` and `tcloud download`.
-
-+ Datasets
-  - tcloud will help place the public datasets access in `TACC_USERDIR`. You can view the table of  datasets at [Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0) or check the table below.
-
-      - 
-        |  | Dataset Name |
-        | :------: | :------: |
-        | 0 | imagenet |
-        | 1 | mnist |
-        | 2 | cifar-10 |
-        | 3 | coco17 |
-        | 4 | more datasets upon request |
-
-    - to access the public dataset you need to add this command in your tuxiv.conf file:
-      ~~~yaml
-      datasets:
-        - imagenet
-      ~~~
-    - also use this path as a dataset directory:
-      ~~~shell
-      ${TACC_USERDIR}/DATASET_NAME
-      ~~~
-  - User dataset: if you want to use your own dataset, you may **skip** this part and follow the [instructions](docs/user_dataset.md) to upload and use your dataset.
-
-
-#### TACC VARIABLES
-
-+ `TACC_WORKDIR`: TACC job workspace directory. Each job has a different workspace directory.
-+ `TACC_USERDIR`: TACC User directory.
-+ `TACC_SLURM_USERLOG`: Slurm log directory. The default value is `${TACC_USERDIR}/slurm_log`.
-
-## Retriving Your Job Status and Output
+### Retriving Your Job Status and Output
 In this section, we provide two methods to monitor the job log.
-+ Download
 
-  You can either save your output files in `USERDIR` or copy your output files to `USERDIR` in your own code. After training, you can use `tcloud ls [filepath]` to find the output files and use `tcloud download [filepath]`. Note that you can only read and download files in `USERDIR`, and the files in `WORKDIR` may be removed after the job is finished.
+After training, you can use `tcloud ls [filepath]` to find the output files
++ cat
+
+  You can configure your log path in the `tuxiv.conf`. The default path is `slurm_log/slurm-jobid.out`.
+
+  ```
+  tcloud cat slurm_log/slurm-jobid.out
+  ```
+  In the helloworld example, the [tuxiv.conf](example/helloworld/tuxiv.conf) file specifies the log path as `slurm_log/hello.log`
+
+
++ download
+
+  You can use `tcloud download [filepath]`. 
+  
+  Note that you can only read and download files in `USERDIR`, and the files in `WORKDIR` may be removed after the job is finished.
+  ```
+  tcloud download slurm_log/slurm-jobid.out
+  ```
 
 
 ## Demo video
-The following videos will help you use tcloud CLI to begin your TACC journey: [demo video](https://drive.google.com/file/d/1eEZzgH3MipdXy3eIfgasUaMdlMquCqf8/view?usp=sharing) and [conda-cache video](https://drive.google.com/file/d/1hfFfWZoJj6dlNiOK-dbyvrE_VmM07w7A/view?usp=sharing).
+The following videos will help you use tcloud CLI to begin your TACC journey: [demo video](https://hkustconnect-my.sharepoint.com/:v:/g/personal/dsunak_connect_ust_hk/EUYW3f8IRwVLhBtCYP_ufs4BpQ7CaxrCUBiUexY7-nLX7w?e=O2gR2G).
 
 ## Examples
 Basic examples are provided under the [example](example) folder. These examples include: [HelloWorld](example/helloworld), [TensorFlow](example/TensorFlow), [PyTorch](example/PyTorch) and [MXNet](example/MXNet).
