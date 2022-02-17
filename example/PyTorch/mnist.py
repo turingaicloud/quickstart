@@ -1,5 +1,7 @@
 from __future__ import print_function
 import argparse
+import os
+import subprocess
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -8,8 +10,7 @@ from torchvision import datasets, transforms
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from torch.nn.parallel import DistributedDataParallel
-from torch.utils.tensorboard import SummaryWriter
-import os
+
 
 def dist_init(host_addr, rank, local_rank, world_size, port=23456):
     host_addr_full = 'tcp://' + host_addr + ':' + str(port)
@@ -68,22 +69,8 @@ def test(args, model, local_rank, test_loader, world_size):
         test_loss, correct, length,
         100. * correct / length))
 
-def get_ip(str):
-    output = ""
-    if ',' in str:
-        output = str.split(",")[0]
-    elif '[' in str:
-        str1 = str.split("[")
-        str2 = str1[1].strip("]").split("-")
-        output = str1[0] + str2[0]
-    else:
-        print("Unknow ip format")
-    return output
-
 def main():
-    print("This is a PyTorch Example!!!")
-    # tensorboard summary
-    writer = SummaryWriter()
+
     # Training settings
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
     parser.add_argument('--batch-size', type=int, default=64, metavar='N',
@@ -118,8 +105,7 @@ def main():
     local_rank = int(os.environ['SLURM_LOCALID'])
     world_size = int(os.environ['SLURM_NTASKS'])
     iplist = os.environ['SLURM_JOB_NODELIST']
-    ip = get_ip(os.environ['SLURM_STEP_NODELIST'])
-    print(rank, local_rank, world_size, iplist, ip)
+    ip = subprocess.getoutput(f"scontrol show hostname {iplist} | head -n1")
 
     dist_init(ip, rank, local_rank, world_size)
     train_dataset = datasets.MNIST(args.datasetDir, train=True, download=False,
