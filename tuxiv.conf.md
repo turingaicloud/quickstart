@@ -20,14 +20,56 @@ There are four parts in `tuxiv.conf` that configure different parts of job submi
 
   In this section, you can specify your software requirements, including the environment name, dependencies, source channels and so on. The tcloud CLI will help build your environment with *miniconda*.
 
-  ~~~yaml
-  environment:
-      name: torch-env
-      dependencies:
-          - pytorch=1.6.0
-          - torchvision=0.7.0
-      channels: pytorch
-  ~~~
+  Notice: The environment name is *optional*. You can have the following two options.
+  1. Environment name set. 
+      
+      In this case, tcloud will create a new environment when you change any of your dependencies configuration.
+      ~~~yaml
+      environment:
+        dependencies:
+            - pytorch=1.6.0
+            - torchvision=0.7.0
+        channels: pytorch
+      ~~~
+  2. Environment name unset. 
+
+      In this case, the environment will be persistent and tcloud will be updated the environment when you change any of your dependencies configuration (instead of creat a new environment).
+      The environment configuration of tcloud is managed by conda, and you can follow conda to manage your environment.
+      ~~~yaml
+      environment:
+          name: torch-env
+          dependencies:
+              - pytorch=1.6.0
+              - torchvision=0.7.0
+        channels: pytorch
+      ~~~
+  + Check environment
+
+    Check the existing environment with the `tcloud env ls` command.
+    ```
+    ~ ❯ tcloud env ls
+    # conda environments:
+    #
+    base                  *  /mnt/home/username/.Miniconda3
+    pytorch                  /mnt/home/username/.Miniconda3/envs/pytorch
+    ```
+    Check installed dependencies in a sp environment
+    the existing environment dependencies with the `tcloud env ls -n [ENV_NAME]` command.
+    ```
+    ~ ❯ tcloud env ls -n base                                                                        
+    # packages in environment at /mnt/home/username/.Miniconda3:
+    #
+    # Name                    Version                   Build  Channel
+    _libgcc_mutex             0.1                        main
+    brotlipy                  0.7.0           py38h27cfd23_1003
+    ca-certificates           2020.10.14                    0
+    certifi                   2020.6.20          pyhd3eb1b0_3
+    cffi                      1.14.3           py38h261ae71_2
+    chardet                   3.0.4           py38h06a4308_1003
+    conda                     4.9.2            py38h06a4308_0
+    conda-package-handling    1.7.2            py38h03888b9_0
+    ...
+    ```
 
 + Job
 
@@ -35,10 +77,12 @@ There are four parts in `tuxiv.conf` that configure different parts of job submi
 
   ~~~yaml
   job:
-      name: test
-      general:
-          - nodes=2
-          - output=${TACC_SLURM_USERLOG}/output.log
+    name: test
+    general:
+      - nodes=2                # the number of nodes
+      - ntasks-per-node=1      # the number of tasks per node
+      - cpus-per-task=10       # the number of cpu per task
+      - gres=gpu:2             # the number of gpu per node
   ~~~
 
   **Note:** You can modify the output log path in Job section. For debugging purpose, we recommend you set the `output` value under `${TACC_USERDIR}` directory and check it using `tcloud ls` and `tcloud download`.

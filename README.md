@@ -49,29 +49,29 @@ After tcloud is configured correctly, you can try to submit your first job.
 
 1. Go to the example folder in your terminal.
 2. Run `tcloud submit` command.
-```
-~/Dow/quickstart-master/example/helloworld ❯ tcloud submit
-Start parsing tuxiv.conf...
-building file list ...
-8 files to consider
-helloworld/
-helloworld/run.sh
-         151 100%    0.00kB/s    0:00:00 (xfer#1, to-check=5/8)
-helloworld/configurations/
-helloworld/configurations/citynet.sh
-          12 100%   11.72kB/s    0:00:00 (xfer#2, to-check=2/8)
-helloworld/configurations/conda.yaml
-         107 100%  104.49kB/s    0:00:00 (xfer#3, to-check=1/8)
-helloworld/configurations/run.slurm
-         278 100%  271.48kB/s    0:00:00 (xfer#4, to-check=0/8)
+    ```
+    ~/Dow/quickstart-master/example/helloworld ❯ tcloud submit
+    Start parsing tuxiv.conf...
+    building file list ...
+    8 files to consider
+    helloworld/
+    helloworld/run.sh
+            151 100%    0.00kB/s    0:00:00 (xfer#1, to-check=5/8)
+    helloworld/configurations/
+    helloworld/configurations/citynet.sh
+              12 100%   11.72kB/s    0:00:00 (xfer#2, to-check=2/8)
+    helloworld/configurations/conda.yaml
+            107 100%  104.49kB/s    0:00:00 (xfer#3, to-check=1/8)
+    helloworld/configurations/run.slurm
+            278 100%  271.48kB/s    0:00:00 (xfer#4, to-check=0/8)
 
-sent 429 bytes  received 144 bytes  382.00 bytes/sec
-total size is 1071  speedup is 1.87
-Submitted batch job 2000
-Job helloworld submitted.
-```
+    sent 429 bytes  received 144 bytes  382.00 bytes/sec
+    total size is 1071  speedup is 1.87
+    Submitted batch job 2000
+    Job helloworld submitted.
+    ```
 
-### Retriving Your Job Status and Output
+### Retrive Your Job Status and Output
 In this section, we provide two methods to monitor the job log.
 
 After training, you can use `tcloud ls [filepath]` to find the output files
@@ -93,6 +93,14 @@ After training, you can use `tcloud ls [filepath]` to find the output files
   ```
   tcloud download slurm_log/slurm-jobid.out
   ```
+
+### Manage your environment
++ Reuse environment
+  
+  We offer two methods to environmental management.
+  1. If you don't have the name section under the environment block in tuxiv.conf, tcloud will create a new environment for your new project.
+
+  2. You can add the environment name in `tuxiv.conf` to reuse an existing environment. [Detail about tuxiv.conf](tuxiv.conf.md)
 
 
 ## Demo video
