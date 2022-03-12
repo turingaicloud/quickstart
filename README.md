@@ -95,12 +95,10 @@ After training, you can use `tcloud ls [filepath]` to find the output files
   ```
 
 ### Manage your environment
-+ Reuse environment
-  
-  We offer two methods to environmental management.
-  1. If you don't have the name section under the environment block in tuxiv.conf, tcloud will create a new environment for your new project.
+tcloud uses [conda](https://docs.conda.io/projects/conda/en/latest/index.html) environment to manage your dependencies. We offer two ways of environment management:
 
-  2. You can add the environment name in `tuxiv.conf` to reuse an existing environment. [Detail about tuxiv.conf](tuxiv.conf.md)
+1. One-off Environment. A new environment will be created every time you submit a task to TACC. If your dependencies configuration does not change between two consecutive submissions, we will reuse the previous environment to save time. This is the *default* behavior.
+2. Persistent Environment. The environment will be shared across multiple task submissions. When you change your dependency configuration, tcloud will update this environment in stead of creating a new one. Learn how to do this in [tuxiv.conf documentation](tuxiv.conf.md)
 
 
 ## Demo video
