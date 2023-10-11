@@ -95,10 +95,26 @@ After training, you can use `tcloud ls [filepath]` to find the output files
   ```
 
 ### Manage your environment
-tcloud uses [conda](https://docs.conda.io/projects/conda/en/latest/index.html) environment to manage your dependencies. We offer two ways of environment management:
+tcloud uses [Conda](https://docs.conda.io/projects/conda/en/latest/index.html) to manage your dependencies. All dependencies will be installed through conda. Please specify the required conda channel to meet the installation requirements. In tcloud, we offer two ways of environment management:
 
-1. One-off Environment. A new environment will be created every time you submit a task to TACC. If your dependencies configuration does not change between two consecutive submissions, we will reuse the previous environment to save time. This is the *default* behavior.
-2. Persistent Environment. The environment will be shared across multiple task submissions. When you change your dependency configuration, tcloud will update this environment in stead of creating a new one. Learn how to do this in [tuxiv.conf documentation](tuxiv.conf.md)
+1. One-off Environment. A new environment with different dependencies will be created every time you submit a task to TACC. If you do not specify an environment name and your dependencies configuration does not change between two consecutive submissions in `tuxiv.conf`, we will reuse the previous environment to save time. This is the *default* behavior.
+    ~~~yaml
+    environment:
+      # name:       # do not specify environment name
+      dependencies:
+          - pytorch=1.6.0
+          - torchvision=0.7.0
+      channels: pytorch
+    ~~~
+2. Persistent Environment. You can create a dedicated environment for each project. It needs to set a different environment name in `tuxiv.conf` for each project. When you change your dependencies configuration with an exist environment, tcloud will update this environment in stead of creating a new one. Learn how to do this in [tuxiv.conf documentation environment part.](tuxiv.conf.md#environment)
+    ~~~yaml
+    environment:
+      name: torch-env   # dedicated environment name
+      dependencies:
+          - pytorch=1.6.0
+          - torchvision=0.7.0
+      channels: pytorch
+    ~~~
 
 
 ## Demo video
