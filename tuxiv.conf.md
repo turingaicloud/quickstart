@@ -7,7 +7,7 @@
 
 There are four parts in `tuxiv.conf` that configure different parts of job submission. Noted that `tuxiv.conf` follows **yaml format**.
 
-+ Entrypoint
+#### Entrypoint
 
   In this section, you should input you shell commands to run your code line-by-line. The tcloud CLI will help run the job according to your commands.
 
@@ -16,7 +16,7 @@ There are four parts in `tuxiv.conf` that configure different parts of job submi
       - python ${TACC_WORKDIR}/mnist.py --epoch=3 
   ~~~
 
-+ Environment
+#### Environment
 
   In this section, you can specify your software requirements, including the environment name, dependencies, source channels and so on. The tcloud CLI will help build your environment with *miniconda*.
 
@@ -71,7 +71,7 @@ There are four parts in `tuxiv.conf` that configure different parts of job submi
     ...
     ```
 
-+ Job
+#### Job
 
   In this section, you can specify your configurations for cluster resources, including number of nodes, CPUs, GPUs, output file and so on. All the cluster configuration should be set in the general part.
 
@@ -87,7 +87,7 @@ There are four parts in `tuxiv.conf` that configure different parts of job submi
 
   **Note:** You can modify the output log path in Job section. For debugging purpose, we recommend you set the `output` value under `${TACC_USERDIR}` directory and check it using `tcloud ls` and `tcloud download`.
 
-+ Datasets
+#### Datasets
   - tcloud will help place the public datasets access in `TACC_USERDIR`. You can view the table of  datasets at [Dataset Info](https://docs.google.com/spreadsheets/d/18qi2YpYvuXkWns7KY9pHYQclhS1Yyt5ysqgZ4plYcTg/edit#gid=0) or check the table below.
 
       - 
